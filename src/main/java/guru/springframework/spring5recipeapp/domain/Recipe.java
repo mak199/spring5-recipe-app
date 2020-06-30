@@ -41,6 +41,11 @@ public class Recipe {
     @OneToOne(cascade = CascadeType.ALL)
     private Notes notes;
 
+    @ManyToMany
+    // joinTable since without it recipe_categories and categories_recipe table created
+    @JoinTable(name="recipe_category",joinColumns = @JoinColumn(name="recipe_id"),inverseJoinColumns = @JoinColumn(name="category_id"))
+    private Set<Category> categories;
+
     public String getDescription() {
         return description;
     }
@@ -128,4 +133,11 @@ public class Recipe {
         this.difficulty = difficulty;
     }
 
+    public Set<Category> getCategories() {
+        return categories;
+    }
+
+    public void setCategories(Set<Category> categories) {
+        this.categories = categories;
+    }
 }

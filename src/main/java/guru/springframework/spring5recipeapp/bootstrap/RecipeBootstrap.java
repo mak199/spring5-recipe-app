@@ -4,6 +4,7 @@ import guru.springframework.spring5recipeapp.domain.*;
 import guru.springframework.spring5recipeapp.repositories.CategoryRepository;
 import guru.springframework.spring5recipeapp.repositories.RecipeRepository;
 import guru.springframework.spring5recipeapp.repositories.UnitOfMeasureRepository;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.context.ApplicationListener;
 import org.springframework.context.event.ContextRefreshedEvent;
 import org.springframework.stereotype.Component;
@@ -13,7 +14,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
-
+@Slf4j
 @Component
 public class RecipeBootstrap implements ApplicationListener<ContextRefreshedEvent> {
 
@@ -30,6 +31,7 @@ public class RecipeBootstrap implements ApplicationListener<ContextRefreshedEven
     @Override
     public void onApplicationEvent(ContextRefreshedEvent event) {
         recipeRepository.saveAll(getRecipes());
+        log.debug("Loading Bootstrap Data");
     }
 
     private List<Recipe> getRecipes() {
@@ -200,5 +202,57 @@ public class RecipeBootstrap implements ApplicationListener<ContextRefreshedEven
 
         recipes.add(tacosRecipe);
         return recipes;
+    }
+
+    public CategoryRepository getCategoryRepository() {
+        return this.categoryRepository;
+    }
+
+    public RecipeRepository getRecipeRepository() {
+        return this.recipeRepository;
+    }
+
+    public UnitOfMeasureRepository getUnitOfMeasureRepository() {
+        return this.unitOfMeasureRepository;
+    }
+
+    public boolean equals(final Object o) {
+        if (o == this) return true;
+        if (!(o instanceof RecipeBootstrap)) return false;
+        final RecipeBootstrap other = (RecipeBootstrap) o;
+        if (!other.canEqual((Object) this)) return false;
+        final Object this$categoryRepository = this.getCategoryRepository();
+        final Object other$categoryRepository = other.getCategoryRepository();
+        if (this$categoryRepository == null ? other$categoryRepository != null : !this$categoryRepository.equals(other$categoryRepository))
+            return false;
+        final Object this$recipeRepository = this.getRecipeRepository();
+        final Object other$recipeRepository = other.getRecipeRepository();
+        if (this$recipeRepository == null ? other$recipeRepository != null : !this$recipeRepository.equals(other$recipeRepository))
+            return false;
+        final Object this$unitOfMeasureRepository = this.getUnitOfMeasureRepository();
+        final Object other$unitOfMeasureRepository = other.getUnitOfMeasureRepository();
+        if (this$unitOfMeasureRepository == null ? other$unitOfMeasureRepository != null : !this$unitOfMeasureRepository.equals(other$unitOfMeasureRepository))
+            return false;
+        return true;
+    }
+
+    protected boolean canEqual(final Object other) {
+        return other instanceof RecipeBootstrap;
+    }
+
+    public int hashCode() {
+        final int PRIME = 59;
+        int result = 1;
+        final Object $categoryRepository = this.getCategoryRepository();
+        result = result * PRIME + ($categoryRepository == null ? 43 : $categoryRepository.hashCode());
+        final Object $recipeRepository = this.getRecipeRepository();
+        result = result * PRIME + ($recipeRepository == null ? 43 : $recipeRepository.hashCode());
+        final Object $unitOfMeasureRepository = this.getUnitOfMeasureRepository();
+        result = result * PRIME + ($unitOfMeasureRepository == null ? 43 : $unitOfMeasureRepository.hashCode());
+        return result;
+    }
+
+    public String toString() {
+        return "RecipeBootstrap(categoryRepository=" + this.getCategoryRepository() + ", recipeRepository=" + this.getRecipeRepository() + ", unitOfMeasureRepository=" + this.getUnitOfMeasureRepository() + ")";
     }
 }

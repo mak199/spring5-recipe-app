@@ -42,7 +42,7 @@ public class RecipeController {
     @RequestMapping("recipe")
     public String saveOrUpdate(@ModelAttribute RecipeCommand command){
         RecipeCommand saveCommand = recipeService.saveRecipeCommand(command);
-        return "redirect:/recipe/"+saveCommand.getId()+"/show/";
+        return "redirect:/recipe/"+saveCommand.getId()+"/show";
 
     }
 
@@ -50,7 +50,7 @@ public class RecipeController {
     @RequestMapping("recipe/{id}/delete")
     public String deleteById(@PathVariable String id){
         //log.debug("Loading Bootstrap Data");
-        recipeService.deletebyId(Long.valueOf(id));
+        recipeService.deleteById(Long.valueOf(id));
         return "redirect:/";
 
     }

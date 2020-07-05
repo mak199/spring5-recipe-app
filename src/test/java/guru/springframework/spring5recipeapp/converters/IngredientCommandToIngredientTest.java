@@ -5,8 +5,8 @@ import guru.springframework.spring5recipeapp.commands.IngredientCommand;
 import guru.springframework.spring5recipeapp.commands.UnitOfMeasureCommand;
 import guru.springframework.spring5recipeapp.domain.Ingredient;
 import guru.springframework.spring5recipeapp.domain.Recipe;
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
 import java.math.BigDecimal;
 
@@ -17,12 +17,12 @@ public class IngredientCommandToIngredientTest {
     public static final Recipe RECIPE = new Recipe();
     public static final BigDecimal AMOUNT = new BigDecimal("1");
     public static final String DESCRIPTION = "Cheeseburger";
-    public static final Long ID_VALUE = new Long(1L);
-    public static final Long UOM_ID = new Long(2L);
+    public static final Long ID_VALUE = Long.valueOf(1L);
+    public static final Long UOM_ID = Long.valueOf(2L);
 
     IngredientCommandToIngredient converter;
 
-    @Before
+    @BeforeEach
     public void setUp() throws Exception {
         converter = new IngredientCommandToIngredient(new UnitOfMeasureCommandToUnitOfMeasure());
     }
@@ -31,6 +31,7 @@ public class IngredientCommandToIngredientTest {
     public void testNullObject() throws Exception {
         assertNull(converter.convert(null));
     }
+
 
     @Test
     public void testEmptyObject() throws Exception {

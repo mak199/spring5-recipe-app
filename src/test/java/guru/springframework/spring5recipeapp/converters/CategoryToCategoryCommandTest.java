@@ -2,32 +2,35 @@ package guru.springframework.spring5recipeapp.converters;
 
 import guru.springframework.spring5recipeapp.commands.CategoryCommand;
 import guru.springframework.spring5recipeapp.domain.Category;
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertNull;
 
 
 public class CategoryToCategoryCommandTest {
 
     public static final Long ID_VALUE = Long.valueOf(1L);
-    public static final String DESCRIPTION = "descript";
-    CategoryToCategoryCommand convter;
+    public static final String DESCRIPTION = "description";
+    CategoryToCategoryCommand converter;
 
-    @Before
+    @BeforeEach
     public void setUp() throws Exception {
-        convter = new CategoryToCategoryCommand();
+        converter = new CategoryToCategoryCommand();
     }
 
     @Test
     public void testNullObject() throws Exception {
-        assertNull(convter.convert(null));
+        assertNull(converter.convert(null));
     }
 
     @Test
     public void testEmptyObject() throws Exception {
-        assertNotNull(convter.convert(new Category()));
+        assertNotNull(converter.convert(new Category()));
     }
+
 
     @Test
     public void convert() throws Exception {
@@ -37,10 +40,10 @@ public class CategoryToCategoryCommandTest {
         category.setDescription(DESCRIPTION);
 
         //when
-        CategoryCommand categoryCommand = convter.convert(category);
+        CategoryCommand categoryCommand = converter.convert(category);
 
         //then
-        assertEquals(ID_VALUE, java.util.Optional.of(categoryCommand.getId()));
+        assertEquals(java.util.Optional.of(ID_VALUE), java.util.Optional.of(categoryCommand.getId()));
         assertEquals(DESCRIPTION, categoryCommand.getDescription());
 
     }

@@ -2,8 +2,8 @@ package guru.springframework.spring5recipeapp.converters;
 
 import guru.springframework.spring5recipeapp.commands.NotesCommand;
 import guru.springframework.spring5recipeapp.domain.Notes;
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
 import static org.junit.Assert.*;
 
@@ -12,11 +12,11 @@ import static org.junit.Assert.*;
  */
 public class NotesToNotesCommandTest {
 
-    public static final Long ID_VALUE = new Long(1L);
+    public static final Long ID_VALUE = Long.valueOf(1L);
     public static final String RECIPE_NOTES = "Notes";
     NotesToNotesCommand converter;
 
-    @Before
+    @BeforeEach
     public void setUp() throws Exception {
         converter = new NotesToNotesCommand();
     }

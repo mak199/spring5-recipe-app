@@ -23,7 +23,13 @@ public class Ingredient {
     private Recipe recipe;
 
 
+    public UnitOfMeasure getUom() {
+        return uom;
+    }
 
+    public void setUom(UnitOfMeasure uom) {
+        this.uom = uom;
+    }
 
     public Ingredient(){
 

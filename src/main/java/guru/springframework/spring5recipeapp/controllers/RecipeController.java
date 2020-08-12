@@ -1,10 +1,13 @@
 package guru.springframework.spring5recipeapp.controllers;
 
 import guru.springframework.spring5recipeapp.commands.RecipeCommand;
+import guru.springframework.spring5recipeapp.exceptions.NotFoundException;
 import guru.springframework.spring5recipeapp.services.RecipeService;
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.ModelAndView;
 
 @Controller
 public class RecipeController {
@@ -18,7 +21,8 @@ public class RecipeController {
     @GetMapping
     @RequestMapping("/recipe/{id}/show")
     public String showById(@PathVariable String id, Model model){
-        model.addAttribute("recipe", recipeService.findById(Long.valueOf(id)));
+        model.addAttribute("recipe", recipeService.findById(new Long(id)));
+
         return "recipe/show";
     }
 
@@ -55,7 +59,27 @@ public class RecipeController {
 
     }
 
+    @ResponseStatus(HttpStatus.NOT_FOUND)
+    @ExceptionHandler(NotFoundException.class)
+    public ModelAndView handleNotFound(Exception exception){
+        //log.error("Handling not found exception");
+        ModelAndView modelAndView = new ModelAndView();
+        modelAndView.setViewName("404error");
+        modelAndView.addObject("exception",exception);
 
+        return modelAndView;
 
+    }
 
+    @ResponseStatus(HttpStatus.BAD_REQUEST)
+    @ExceptionHandler(java.lang.NumberFormatException.class)
+    public ModelAndView handleBadRequest(Exception exception){
+        //log.error("Handling not found exception");
+        ModelAndView modelAndView = new ModelAndView();
+        modelAndView.setViewName("400error");
+        modelAndView.addObject("exception",exception);
+
+        return modelAndView;
+
+    }
 }

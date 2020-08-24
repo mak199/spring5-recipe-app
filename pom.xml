@@ -91,7 +91,13 @@
             <version>6.0.20.Final</version>
         </dependency>
 
-
+        <!--MySQL Driver-->
+        <dependency>
+            <groupId>mysql</groupId>
+            <artifactId>mysql-connector-java</artifactId>
+            <version>8.0.20</version>
+            <scope>runtime</scope>
+        </dependency>
 
         <!-- end of webjars -->
     </dependencies>

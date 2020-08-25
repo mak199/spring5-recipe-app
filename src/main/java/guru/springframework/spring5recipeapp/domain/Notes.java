@@ -1,23 +1,14 @@
 package guru.springframework.spring5recipeapp.domain;
 
-import lombok.Data;
-import lombok.EqualsAndHashCode;
+import lombok.Getter;
+import lombok.Setter;
 
-import javax.persistence.*;
-
-@Data
-@EqualsAndHashCode(exclude = {"recipe"})
-@Entity
+@Getter
+@Setter
 public class Notes {
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
-    // no cascade since recipe owns this notes
-    // if we delete notes we do not want to delete recipe, but inverse should happen
-    @OneToOne
+
+    private String id;
     private Recipe recipe;
-    // to allow notes to store string of more than 256 characters
-    @Lob
     private String recipeNotes;
 
 }

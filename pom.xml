@@ -18,7 +18,7 @@
     <properties>
         <java.version>1.8</java.version>
         <spring-boot.repackage.skip>true</spring-boot.repackage.skip>
-        <webjars-bootstrap.version>3.3.7-1</webjars-bootstrap.version>
+        <webjars-bootstrap.version>5.0.0</webjars-bootstrap.version>
 
         <webjars-jquery-ui.version>1.11.4</webjars-jquery-ui.version>
 
